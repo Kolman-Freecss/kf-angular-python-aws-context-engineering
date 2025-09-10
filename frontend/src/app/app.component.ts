@@ -1,11 +1,11 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, RouterOutlet],
+  imports: [CommonModule, RouterOutlet, RouterLink, RouterLinkActive],
   template: `
     <div class="app-container">
       <header class="app-header">
@@ -13,6 +13,7 @@ import { RouterOutlet } from '@angular/router';
         <nav>
           <a routerLink="/dashboard" routerLinkActive="active">Dashboard</a>
           <a routerLink="/tasks" routerLinkActive="active">Tasks</a>
+          <a routerLink="/categories" routerLinkActive="active">Categories</a>
           <a routerLink="/profile" routerLinkActive="active">Profile</a>
         </nav>
       </header>

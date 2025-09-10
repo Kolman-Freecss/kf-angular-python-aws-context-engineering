@@ -4,7 +4,7 @@ from contextlib import asynccontextmanager
 
 from core.config import settings
 from core.database import engine, Base
-from api import users, products, auth
+from api import users, products, auth, tasks, files
 from models import user
 
 
@@ -37,6 +37,8 @@ app.add_middleware(
 app.include_router(auth.router, prefix="/api/auth", tags=["auth"])
 app.include_router(users.router, prefix="/api", tags=["users"])
 app.include_router(products.router, prefix="/api", tags=["products"])
+app.include_router(tasks.router, prefix="/api", tags=["tasks"])
+app.include_router(files.router, prefix="/api", tags=["files"])
 
 
 @app.get("/")

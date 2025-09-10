@@ -15,6 +15,10 @@ export const routes: Routes = [
     loadComponent: () => import('./features/tasks/tasks.component').then(m => m.TasksComponent)
   },
   {
+    path: 'categories',
+    loadComponent: () => import('./features/tasks/components/category-management.component').then(m => m.CategoryManagementComponent)
+  },
+  {
     path: 'profile',
     loadComponent: () => import('./features/profile/profile.component').then(m => m.ProfileComponent)
   },
