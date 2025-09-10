@@ -60,6 +60,7 @@ services:
       - DATA_DIR=/tmp/localstack/data
       - DOCKER_HOST=unix:///var/run/docker.sock
       - LAMBDA_EXECUTOR=docker
+      - PERSISTENCE=1
     volumes:
       - "/var/run/docker.sock:/var/run/docker.sock"
       - "localstack_data:/tmp/localstack"

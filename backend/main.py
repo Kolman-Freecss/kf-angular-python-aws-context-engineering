@@ -5,6 +5,7 @@ from contextlib import asynccontextmanager
 from core.config import settings
 from core.database import engine, Base
 from api import users, products, auth
+from models import user
 
 
 @asynccontextmanager
