@@ -1,0 +1,60 @@
+---
+description: FastAPI Architecture & Best Practices
+globs: backend/app/**
+alwaysApply: true
+---
+
+## API Structure
+- Use APIRouter per domain/module
+- Implement proper HTTP status codes
+- Use response models for all endpoints
+- Implement proper error handling with HTTPException
+- Use async/await for all I/O operations
+
+## Data Models
+- Use Pydantic models with full typing
+- Implement BaseModel inheritance patterns
+- Use validators for data validation
+- Implement proper serialization with Config classes
+- Use Optional types for nullable fields
+
+## Database Integration
+- Use SQLAlchemy with async sessions
+- Implement proper database relationships
+- Use Alembic for migrations
+- Implement connection pooling
+- Use proper transaction management
+
+## Authentication & Security
+- Implement JWT token authentication
+- Use OAuth2PasswordBearer for token extraction
+- Implement proper password hashing with bcrypt
+- Use dependency injection for current user
+- Implement role-based access control
+
+## Dependency Injection
+- Use Depends() for service injection
+- Implement proper database session management
+- Use settings injection for configuration
+- Implement proper error handling in dependencies
+
+## Error Handling
+- Use HTTPException for API errors
+- Implement proper error response models
+- Use try-catch blocks for database operations
+- Implement proper logging
+- Use proper status codes
+
+## Testing
+- Write unit tests for all services
+- Implement integration tests for API endpoints
+- Use pytest fixtures for test data
+- Mock external dependencies
+- Test error scenarios
+
+## Code Quality
+- Use type hints throughout
+- Implement proper docstrings
+- Use environment variables for configuration
+- Avoid hardcoded values
+- Implement proper logging

@@ -1,0 +1,55 @@
+---
+description: Cypress E2E Testing Strategy
+globs: frontend/cypress/**
+alwaysApply: true
+---
+
+## Element Selection
+- Use data-testid attributes exclusively for element selection
+- Avoid CSS selectors, classes, or IDs
+- Use semantic test IDs that describe the element's purpose
+- Implement consistent naming conventions
+
+## Test Organization
+- Organize tests by feature in separate folders
+- Use descriptive test names that explain expected behavior
+- Group related tests with describe blocks
+- Implement proper test isolation
+
+## API Mocking
+- Use cy.intercept() for all network requests
+- Mock external APIs and services
+- Use fixtures for consistent test data
+- Implement proper request/response mocking
+
+## Test Structure
+- Use beforeEach for common setup
+- Implement proper cleanup in afterEach
+- Use custom commands for reusable actions
+- Implement page object model for complex pages
+
+## User Journey Testing
+- Test complete user workflows
+- Focus on user behavior, not implementation
+- Test error scenarios and edge cases
+- Implement proper assertions
+
+## Performance Testing
+- Test loading states and transitions
+- Implement timeout configurations
+- Test responsive design
+- Monitor performance metrics
+
+## Best Practices
+- Keep tests independent and isolated
+- Use proper wait strategies
+- Implement proper error handling
+- Use meaningful test data
+- Document complex test scenarios
+
+## Coverage Requirements
+- All user-critical features must have E2E tests
+- Test authentication flows
+- Test CRUD operations
+- Test error handling
+- Test responsive design

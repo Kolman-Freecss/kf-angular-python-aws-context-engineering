@@ -1,0 +1,56 @@
+---
+description: Angular 20 Architecture & Best Practices
+globs: frontend/src/**
+alwaysApply: true
+---
+
+## Component Architecture
+- Use standalone components exclusively
+- Implement OnPush change detection strategy
+- Use signals for local component state
+- Prefer computed() for derived state
+- Use effect() for side effects
+
+## State Management
+- Use NgRx for complex global state
+- Implement feature-based state structure
+- Use createAction, createReducer, createSelector patterns
+- Implement effects for async operations
+- Use ComponentStore for component-level state
+
+## Dependency Injection
+- Use @inject() instead of constructor injection
+- Implement provideX pattern for services
+- Use functional guards and interceptors
+- Prefer tree-shakable providers
+
+## Routing & Navigation
+- Use functional guards (canActivate, canDeactivate)
+- Implement lazy loading for feature modules
+- Use resolvers for data pre-loading
+- Implement proper error handling
+
+## Forms & Validation
+- Use reactive forms exclusively
+- Implement custom validators
+- Use typed form controls
+- Implement proper error display
+
+## HTTP & Services
+- Use HttpClient with proper typing
+- Implement interceptors for auth and error handling
+- Use retry and timeout operators
+- Implement proper loading states
+
+## Testing
+- Use data-testid attributes for element selection
+- Test behavior, not implementation
+- Mock external dependencies
+- Use TestBed.configureTestingModule properly
+
+## Code Quality
+- Avoid any type - use proper TypeScript typing
+- No console.log in production code
+- No imperative logic in templates
+- Use proper error handling with try-catch
+- Implement proper loading and error states

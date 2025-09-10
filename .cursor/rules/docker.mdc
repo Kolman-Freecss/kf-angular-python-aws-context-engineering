@@ -1,0 +1,57 @@
+---
+description: Docker & Containerization Best Practices
+globs: docker/**, docker-compose.yml, Dockerfile*
+alwaysApply: true
+---
+
+## Dockerfile Best Practices
+- Use multi-stage builds to optimize image size
+- Use specific version tags for base images
+- Run services as non-root users
+- Use .dockerignore to exclude unnecessary files
+- Implement proper layer caching
+
+## Security
+- Use non-root users for all services
+- Scan images for vulnerabilities
+- Use minimal base images (alpine, slim)
+- Implement proper secret management
+- Use read-only filesystems where possible
+
+## Configuration Management
+- Use .env files for environment-specific config
+- Implement proper environment variable injection
+- Use config maps for complex configurations
+- Implement proper secret handling
+
+## Build Optimization
+- Exclude dev dependencies from production builds
+- Use proper layer ordering for caching
+- Implement build-time optimizations
+- Use proper COPY vs ADD instructions
+
+## Docker Compose
+- Define clear service boundaries
+- Use named volumes for persistent data
+- Implement proper networking
+- Use health checks for service monitoring
+- Implement proper dependency management
+
+## Development Workflow
+- Use development-specific configurations
+- Implement hot reloading for development
+- Use proper volume mounting for development
+- Implement proper logging configuration
+
+## Production Considerations
+- Use production-optimized configurations
+- Implement proper resource limits
+- Use proper restart policies
+- Implement proper monitoring and logging
+- Use proper backup strategies
+
+## AWS Integration
+- Use LocalStack for local AWS service simulation
+- Implement proper AWS service configuration
+- Use proper IAM roles and policies
+- Implement proper service discovery

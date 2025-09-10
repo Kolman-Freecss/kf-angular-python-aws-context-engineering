@@ -1,0 +1,67 @@
+---
+description: Testing Strategy & Best Practices
+globs: **/*.spec.ts, **/*.test.ts, **/tests/**, **/cypress/**
+alwaysApply: true
+---
+
+## Testing Philosophy
+- Test behavior, not implementation
+- Write tests that describe user expectations
+- Focus on critical user journeys
+- Implement proper test isolation
+
+## Unit Testing
+- Test individual functions and methods
+- Mock external dependencies
+- Use proper test data and fixtures
+- Implement proper assertions
+- Test edge cases and error scenarios
+
+## Integration Testing
+- Test component interactions
+- Test API endpoint integration
+- Test database operations
+- Test external service integration
+- Use proper test databases
+
+## E2E Testing
+- Test complete user workflows
+- Use realistic test data
+- Test cross-browser compatibility
+- Test responsive design
+- Test performance and loading times
+
+## Test Organization
+- Organize tests by feature
+- Use descriptive test names
+- Implement proper test structure
+- Use proper setup and teardown
+- Implement proper test data management
+
+## Mocking Strategy
+- Mock external APIs and services
+- Use proper mock data
+- Implement proper mock cleanup
+- Test both success and failure scenarios
+- Use proper mock verification
+
+## Test Data Management
+- Use fixtures for consistent test data
+- Implement proper test data cleanup
+- Use factories for dynamic test data
+- Implement proper test isolation
+- Use proper test database management
+
+## Performance Testing
+- Test application performance
+- Test database query performance
+- Test API response times
+- Test memory usage
+- Test concurrent user scenarios
+
+## Test Coverage
+- Aim for high test coverage
+- Focus on critical paths
+- Test error scenarios
+- Test edge cases
+- Implement proper coverage reporting

@@ -1,0 +1,68 @@
+---
+description: AWS Services Integration & LocalStack
+globs: backend/app/**, scripts/**, docker-compose.yml
+alwaysApply: true
+---
+
+## AWS Service Integration
+- Use boto3 for AWS service integration
+- Implement proper error handling for AWS operations
+- Use proper AWS service configuration
+- Implement proper retry logic
+- Use proper logging for AWS operations
+
+## LocalStack Development
+- Use LocalStack for local AWS service simulation
+- Implement proper LocalStack configuration
+- Use proper service initialization
+- Implement proper health checks
+- Use proper service discovery
+
+## S3 Integration
+- Use proper bucket naming conventions
+- Implement proper file upload handling
+- Use proper access control
+- Implement proper error handling
+- Use proper file validation
+
+## DynamoDB Integration
+- Use proper table design
+- Implement proper data modeling
+- Use proper query patterns
+- Implement proper error handling
+- Use proper data validation
+
+## SES Integration
+- Use proper email templates
+- Implement proper email validation
+- Use proper error handling
+- Implement proper delivery tracking
+- Use proper email formatting
+
+## Lambda Integration
+- Use proper function design
+- Implement proper error handling
+- Use proper logging
+- Implement proper monitoring
+- Use proper deployment strategies
+
+## Security Best Practices
+- Use proper IAM roles and policies
+- Implement proper access control
+- Use proper encryption
+- Implement proper secret management
+- Use proper audit logging
+
+## Configuration Management
+- Use environment variables for AWS configuration
+- Implement proper service discovery
+- Use proper endpoint configuration
+- Implement proper region management
+- Use proper credential management
+
+## Error Handling
+- Implement proper AWS error handling
+- Use proper retry mechanisms
+- Implement proper fallback strategies
+- Use proper error logging
+- Implement proper user feedback

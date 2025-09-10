@@ -1,0 +1,13 @@
+---
+description: General Development Standards
+globs: "**/*"
+alwaysApply: true
+---
+
+Always write typed, readable, and maintainable code
+
+Include comments for public functions or complex logic
+
+Follow naming conventions per tech (PascalCase for classes, camelCase for variables)
+
+Keep context-specific logic scoped to its domain
