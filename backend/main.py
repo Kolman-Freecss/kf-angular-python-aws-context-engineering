@@ -4,7 +4,7 @@ from contextlib import asynccontextmanager
 
 from core.config import settings
 from core.database import engine, Base
-from api import users, products, auth, tasks, files
+from api import users, products, auth, tasks, files, notifications, analytics, websocket, advanced_tasks
 from models import user
 
 
@@ -39,6 +39,10 @@ app.include_router(users.router, prefix="/api", tags=["users"])
 app.include_router(products.router, prefix="/api", tags=["products"])
 app.include_router(tasks.router, prefix="/api", tags=["tasks"])
 app.include_router(files.router, prefix="/api", tags=["files"])
+app.include_router(notifications.router, prefix="/api/notifications", tags=["notifications"])
+app.include_router(analytics.router, prefix="/api/analytics", tags=["analytics"])
+app.include_router(websocket.router, prefix="/api", tags=["websocket"])
+app.include_router(advanced_tasks.router, prefix="/api/advanced", tags=["advanced-tasks"])
 
 
 @app.get("/")

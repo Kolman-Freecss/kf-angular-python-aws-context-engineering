@@ -96,6 +96,10 @@ async def register(user: UserCreate, db: Session = Depends(get_db)):
     db.commit()
     db.refresh(db_user)
     
+    # Send welcome email
+    from core.tasks.email_tasks import send_welcome_email
+    send_welcome_email.delay(db_user.id)
+    
     return db_user
 
 

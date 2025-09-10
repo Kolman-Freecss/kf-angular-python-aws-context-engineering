@@ -19,3 +19,5 @@ class User(Base):
     tasks = relationship("Task", back_populates="user")
     categories = relationship("Category", back_populates="user")
     files = relationship("TaskFile", back_populates="user")
+    notifications = relationship("Notification", back_populates="user")
+    notification_preferences = relationship("NotificationPreference", back_populates="user", uselist=False)

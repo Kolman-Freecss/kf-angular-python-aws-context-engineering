@@ -29,11 +29,72 @@ services:
       - AWS_SECRET_ACCESS_KEY=test
       - AWS_DEFAULT_REGION=us-east-1
       - JWT_SECRET=your-secret-key
+      - CELERY_BROKER_URL=redis://redis:6379/0
+      - CELERY_RESULT_BACKEND=redis://redis:6379/0
+      - REDIS_URL=redis://redis:6379/0
     depends_on:
       - db
+      - redis
       - localstack
     volumes:
       - backend_logs:/app/logs
+    networks:
+      - app-network
+
+  celery:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    command: celery -A core.celery_app worker --loglevel=info
+    environment:
+      - DATABASE_URL=postgresql://user:pass@db:5432/mydb
+      - AWS_ENDPOINT=http://localstack:4566
+      - AWS_ACCESS_KEY_ID=test
+      - AWS_SECRET_ACCESS_KEY=test
+      - AWS_DEFAULT_REGION=us-east-1
+      - JWT_SECRET=your-secret-key
+      - CELERY_BROKER_URL=redis://redis:6379/0
+      - CELERY_RESULT_BACKEND=redis://redis:6379/0
+      - REDIS_URL=redis://redis:6379/0
+    depends_on:
+      - db
+      - redis
+      - localstack
+    volumes:
+      - backend_logs:/app/logs
+    networks:
+      - app-network
+
+  celery-beat:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    command: celery -A core.celery_app beat --loglevel=info
+    environment:
+      - DATABASE_URL=postgresql://user:pass@db:5432/mydb
+      - AWS_ENDPOINT=http://localstack:4566
+      - AWS_ACCESS_KEY_ID=test
+      - AWS_SECRET_ACCESS_KEY=test
+      - AWS_DEFAULT_REGION=us-east-1
+      - JWT_SECRET=your-secret-key
+      - CELERY_BROKER_URL=redis://redis:6379/0
+      - CELERY_RESULT_BACKEND=redis://redis:6379/0
+      - REDIS_URL=redis://redis:6379/0
+    depends_on:
+      - db
+      - redis
+      - localstack
+    volumes:
+      - backend_logs:/app/logs
+    networks:
+      - app-network
+
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
     networks:
       - app-network
 
@@ -72,6 +133,7 @@ volumes:
   backend_logs:
   postgres_data:
   localstack_data:
+  redis_data:
 
 networks:
   app-network:

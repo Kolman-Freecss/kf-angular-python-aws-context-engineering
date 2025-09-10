@@ -31,6 +31,14 @@ class Settings(BaseSettings):
     
     # Email settings
     SES_FROM_EMAIL: str = "noreply@taskflow.com"
+    SES_REGION: str = "us-east-1"
+    
+    # Celery settings
+    CELERY_BROKER_URL: str = "redis://redis:6379/0"
+    CELERY_RESULT_BACKEND: str = "redis://redis:6379/0"
+    
+    # Redis settings
+    REDIS_URL: str = "redis://redis:6379/0"
     
     class Config:
         env_file = ".env"

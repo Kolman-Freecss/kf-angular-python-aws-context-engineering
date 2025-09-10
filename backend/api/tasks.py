@@ -168,10 +168,20 @@ async def update_task_status(
     if not task:
         raise HTTPException(status_code=404, detail="Task not found")
     
+    # Check if task is being completed
+    was_completed = task.status == TaskStatus.DONE
+    is_being_completed = status_update.status == TaskStatus.DONE
+    
     task.status = status_update.status
     task.updated_at = datetime.utcnow()
     db.commit()
     db.refresh(task)
+    
+    # Send completion notification if task was just completed
+    if not was_completed and is_being_completed:
+        from core.tasks.background_tasks import send_task_completion_notification
+        send_task_completion_notification.delay(task_id)
+    
     return task
 
 
