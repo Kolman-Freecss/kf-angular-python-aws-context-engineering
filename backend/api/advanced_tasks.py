@@ -5,7 +5,7 @@ from typing import List, Optional, Dict, Any
 from datetime import datetime
 
 from core.database import get_db
-from core.auth import get_current_user
+from api.auth import get_current_user
 from models.user import User
 from models.task import Task, TaskDependency, TaskTemplate, TaskStatus, TaskPriority, Category
 from schemas.task import (

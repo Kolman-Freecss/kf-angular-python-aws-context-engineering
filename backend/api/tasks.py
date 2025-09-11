@@ -180,7 +180,13 @@ async def update_task_status(
     # Send completion notification if task was just completed
     if not was_completed and is_being_completed:
         from core.tasks.background_tasks import send_task_completion_notification
-        send_task_completion_notification.delay(task_id)
+        try:
+            if hasattr(send_task_completion_notification, 'delay'):
+                send_task_completion_notification.delay(task_id)
+            else:
+                send_task_completion_notification(task_id)
+        except Exception as e:
+            logger.error(f"Failed to send task completion notification: {e}")
     
     return task
 

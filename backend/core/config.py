@@ -8,6 +8,7 @@ class Settings(BaseSettings):
     APP_NAME: str = "TaskFlow API"
     VERSION: str = "1.0.0"
     DEBUG: bool = False
+    TESTING: bool = False
     
     # Database settings
     DATABASE_URL: str = "postgresql://user:pass@db:5432/mydb"

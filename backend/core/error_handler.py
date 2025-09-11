@@ -6,6 +6,7 @@ from sqlalchemy.exc import SQLAlchemyError, IntegrityError
 from pydantic import ValidationError
 import logging
 import traceback
+from datetime import datetime
 from typing import Union
 from core.logging_config import ErrorHandler
 from core.config import settings
@@ -42,9 +43,9 @@ class ErrorHandlerMiddleware:
         try:
             await self.app(scope, receive, send)
         except Exception as exc:
-            await self.handle_exception(request, exc, send)
+            await self.handle_exception(request, exc, send, scope, receive)
     
-    async def handle_exception(self, request: Request, exc: Exception, send):
+    async def handle_exception(self, request: Request, exc: Exception, send, scope, receive):
         """Handle different types of exceptions"""
         
         # Log the error

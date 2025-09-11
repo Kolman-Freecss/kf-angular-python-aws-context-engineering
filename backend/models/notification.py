@@ -32,7 +32,7 @@ class Notification(Base):
     status = Column(Enum(NotificationStatus), default=NotificationStatus.PENDING, nullable=False)
     email_sent = Column(Boolean, default=False)
     email_sent_at = Column(DateTime(timezone=True), nullable=True)
-    metadata = Column(JSON, nullable=True)  # Store additional data like task_id, etc.
+    notification_metadata = Column(JSON, nullable=True)  # Store additional data like task_id, etc.
     created_at = Column(DateTime(timezone=True), server_default=func.now())
     updated_at = Column(DateTime(timezone=True), onupdate=func.now())
 

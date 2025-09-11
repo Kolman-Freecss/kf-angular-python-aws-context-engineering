@@ -2,7 +2,7 @@ from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.orm import Session
 from typing import List, Optional
 from core.database import get_db
-from core.auth import get_current_user
+from api.auth import get_current_user
 from models.user import User
 from models.notification import Notification, NotificationPreference, EmailTemplate, NotificationType, NotificationStatus
 from schemas.notification import (
@@ -50,7 +50,13 @@ async def send_notification(
         db.refresh(notification)
 
         # Send email asynchronously
-        send_notification_email.delay(notification.id)
+        try:
+            if hasattr(send_notification_email, 'delay'):
+                send_notification_email.delay(notification.id)
+            else:
+                send_notification_email(notification.id)
+        except Exception as e:
+            logger.error(f"Failed to send notification email: {e}")
 
         return {
             "success": True,
@@ -296,7 +302,13 @@ async def send_welcome_notification(
         )
 
     # Queue welcome email
-    send_welcome_email.delay(user_id)
+    try:
+        if hasattr(send_welcome_email, 'delay'):
+            send_welcome_email.delay(user_id)
+        else:
+            send_welcome_email(user_id)
+    except Exception as e:
+        logger.error(f"Failed to send welcome email: {e}")
 
     return {
         "success": True,
@@ -321,7 +333,13 @@ async def generate_user_analytics(
         )
 
     # Queue analytics generation
-    generate_analytics_report.delay(user_id)
+    try:
+        if hasattr(generate_analytics_report, 'delay'):
+            generate_analytics_report.delay(user_id)
+        else:
+            generate_analytics_report(user_id)
+    except Exception as e:
+        logger.error(f"Failed to generate analytics report: {e}")
 
     return {
         "success": True,

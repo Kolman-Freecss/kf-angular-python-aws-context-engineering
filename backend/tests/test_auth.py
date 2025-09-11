@@ -7,6 +7,9 @@ from core.database import get_db, Base
 from core.config import settings
 from main import app
 from models.user import User
+from models.task import Task
+from models.notification import Notification
+from models.file import TaskFile
 from api.auth import get_password_hash, verify_password, create_access_token, authenticate_user
 
 # Test database setup
@@ -40,7 +43,10 @@ def db_session():
     session.close()
 
 @pytest.fixture
-def test_user(db_session):
+def test_user(client, db_session):
+    # Ensure tables are created first
+    Base.metadata.create_all(bind=engine)
+    
     user = User(
         email="test@example.com",
         hashed_password=get_password_hash("password123"),
@@ -89,7 +95,10 @@ class TestUserAuthentication:
         
         assert result is False
         
-    def test_authenticate_user_nonexistent_email(self, db_session):
+    def test_authenticate_user_nonexistent_email(self, client, db_session):
+        # Ensure tables are created first
+        Base.metadata.create_all(bind=engine)
+        
         result = authenticate_user(db_session, "nonexistent@example.com", "password123")
         
         assert result is False

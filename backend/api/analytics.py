@@ -4,7 +4,7 @@ from sqlalchemy import func, and_, or_
 from typing import List, Optional, Dict, Any
 from datetime import datetime, timedelta
 from core.database import get_db
-from core.auth import get_current_user
+from api.auth import get_current_user
 from models.user import User
 from models.task import Task, TaskStatus, TaskPriority, Category
 from models.notification import Notification
@@ -111,7 +111,7 @@ async def get_analytics_overview(
 @router.get("/trends", response_model=TaskTrends)
 async def get_task_trends(
     days: int = Query(30, ge=1, le=365),
-    granularity: str = Query("daily", regex="^(daily|weekly|monthly)$"),
+    granularity: str = Query("daily", pattern="^(daily|weekly|monthly)$"),
     db: Session = Depends(get_db),
     current_user: User = Depends(get_current_user)
 ):
@@ -390,7 +390,7 @@ async def get_time_analytics(
 
 @router.get("/export", response_model=ExportData)
 async def export_analytics_data(
-    format: str = Query("json", regex="^(json|csv)$"),
+    format: str = Query("json", pattern="^(json|csv)$"),
     days: int = Query(30, ge=1, le=365),
     db: Session = Depends(get_db),
     current_user: User = Depends(get_current_user)
