@@ -1,13 +1,13 @@
 import { CommonModule } from '@angular/common';
 import { Component, signal } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { AuthService, LoginRequest } from '../../../core/services/auth.service';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, RouterModule],
   template: `
     <div class="auth-container">
       <div class="auth-card">
@@ -19,6 +19,7 @@ import { AuthService, LoginRequest } from '../../../core/services/auth.service';
             <input
               type="email"
               id="email"
+              data-testid="email-input"
               formControlName="email"
               placeholder="Enter your email"
               [class.error]="loginForm.get('email')?.invalid && loginForm.get('email')?.touched"
@@ -33,6 +34,7 @@ import { AuthService, LoginRequest } from '../../../core/services/auth.service';
             <input
               type="password"
               id="password"
+              data-testid="password-input"
               formControlName="password"
               placeholder="Enter your password"
               [class.error]="loginForm.get('password')?.invalid && loginForm.get('password')?.touched"
@@ -45,6 +47,7 @@ import { AuthService, LoginRequest } from '../../../core/services/auth.service';
           <button
             type="submit"
             class="btn-primary"
+            data-testid="login-btn"
             [disabled]="loginForm.invalid || isLoading()"
           >
             {{ isLoading() ? 'Logging in...' : 'Login' }}

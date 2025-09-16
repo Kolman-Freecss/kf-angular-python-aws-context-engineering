@@ -1,13 +1,13 @@
 import { CommonModule } from '@angular/common';
 import { Component, signal } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { AuthService, RegisterRequest } from '../../../core/services/auth.service';
 
 @Component({
   selector: 'app-register',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, RouterModule],
   template: `
     <div class="auth-container">
       <div class="auth-card">
@@ -19,6 +19,7 @@ import { AuthService, RegisterRequest } from '../../../core/services/auth.servic
             <input
               type="text"
               id="fullName"
+              data-testid="full-name-input"
               formControlName="fullName"
               placeholder="Enter your full name"
               [class.error]="registerForm.get('fullName')?.invalid && registerForm.get('fullName')?.touched"
@@ -33,6 +34,7 @@ import { AuthService, RegisterRequest } from '../../../core/services/auth.servic
             <input
               type="email"
               id="email"
+              data-testid="email-input"
               formControlName="email"
               placeholder="Enter your email"
               [class.error]="registerForm.get('email')?.invalid && registerForm.get('email')?.touched"
@@ -47,6 +49,7 @@ import { AuthService, RegisterRequest } from '../../../core/services/auth.servic
             <input
               type="password"
               id="password"
+              data-testid="password-input"
               formControlName="password"
               placeholder="Enter your password"
               [class.error]="registerForm.get('password')?.invalid && registerForm.get('password')?.touched"
@@ -61,6 +64,7 @@ import { AuthService, RegisterRequest } from '../../../core/services/auth.servic
             <input
               type="password"
               id="confirmPassword"
+              data-testid="confirm-password-input"
               formControlName="confirmPassword"
               placeholder="Confirm your password"
               [class.error]="registerForm.get('confirmPassword')?.invalid && registerForm.get('confirmPassword')?.touched"
@@ -73,6 +77,7 @@ import { AuthService, RegisterRequest } from '../../../core/services/auth.servic
           <button
             type="submit"
             class="btn-primary"
+            data-testid="register-btn"
             [disabled]="registerForm.invalid || isLoading()"
           >
             {{ isLoading() ? 'Creating Account...' : 'Create Account' }}

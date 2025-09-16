@@ -1,7 +1,6 @@
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
-import { CreateTaskRequest, Task, UpdateTaskRequest } from '../../models/task.model';
-import { TaskService } from './task.service';
+import { CreateTaskRequest, Task, TaskService, UpdateTaskRequest } from './task.service';
 
 describe('TaskService', () => {
   let service: TaskService;
@@ -48,10 +47,10 @@ describe('TaskService', () => {
     });
 
     it('should fetch tasks with filters', () => {
-      const filters = { status: 'todo', priority: 'high', page: 1, per_page: 5 };
+      const filters = { status: 'todo', priority: 'high' };
       const mockResponse = { tasks: [mockTask], total: 1, page: 1, per_page: 5 };
 
-      service.getTasks(filters).subscribe(response => {
+      service.getTasks(1, 5, filters).subscribe(response => {
         expect(response).toEqual(mockResponse);
       });
 

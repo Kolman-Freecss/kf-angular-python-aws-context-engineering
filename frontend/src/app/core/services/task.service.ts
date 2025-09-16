@@ -11,7 +11,7 @@ export interface Task {
   description?: string;
   status: 'todo' | 'in_progress' | 'done';
   priority: 'low' | 'medium' | 'high' | 'urgent';
-  due_date?: string;
+  due_date?: string | null;
   category_id?: number;
   user_id: number;
   created_at: string;
@@ -32,7 +32,7 @@ export interface TaskCreate {
   description?: string;
   status?: 'todo' | 'in_progress' | 'done';
   priority?: 'low' | 'medium' | 'high' | 'urgent';
-  due_date?: string;
+  due_date?: string | null;
   category_id?: number;
 }
 
@@ -41,9 +41,13 @@ export interface TaskUpdate {
   description?: string;
   status?: 'todo' | 'in_progress' | 'done';
   priority?: 'low' | 'medium' | 'high' | 'urgent';
-  due_date?: string;
+  due_date?: string | null;
   category_id?: number;
 }
+
+// Type aliases for backward compatibility
+export type CreateTaskRequest = TaskCreate;
+export type UpdateTaskRequest = TaskUpdate;
 
 export interface CategoryCreate {
   name: string;
@@ -59,7 +63,7 @@ export interface TaskListResponse {
   tasks: Task[];
   total: number;
   page: number;
-  size: number;
+  per_page: number;
 }
 
 @Injectable({

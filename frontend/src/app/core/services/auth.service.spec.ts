@@ -21,11 +21,17 @@ describe('AuthService', () => {
 
   describe('login', () => {
     it('should login user successfully', () => {
-      const loginData = { email: 'test@example.com', password: 'password123' };
+      const loginData = { username: 'test@example.com', password: 'password123' };
       const mockResponse = {
         access_token: 'mock-token',
         token_type: 'bearer',
-        user: { id: 1, email: 'test@example.com', full_name: 'Test User' }
+        user: { 
+          id: 1, 
+          email: 'test@example.com', 
+          full_name: 'Test User',
+          is_active: true,
+          created_at: '2023-01-01T00:00:00Z'
+        }
       };
 
       service.login(loginData).subscribe(response => {
@@ -40,7 +46,7 @@ describe('AuthService', () => {
     });
 
     it('should handle login error', () => {
-      const loginData = { email: 'test@example.com', password: 'wrongpassword' };
+      const loginData = { username: 'test@example.com', password: 'wrongpassword' };
       const mockError = { detail: 'Invalid credentials' };
 
       service.login(loginData).subscribe({
@@ -62,15 +68,16 @@ describe('AuthService', () => {
         email: 'test@example.com',
         password: 'password123'
       };
-      const mockResponse = {
-        access_token: 'mock-token',
-        token_type: 'bearer',
-        user: { id: 1, email: 'test@example.com', full_name: 'Test User' }
+      const mockResponse = { 
+        id: 1, 
+        email: 'test@example.com', 
+        full_name: 'Test User',
+        is_active: true,
+        created_at: '2023-01-01T00:00:00Z'
       };
 
       service.register(registerData).subscribe(response => {
         expect(response).toEqual(mockResponse);
-        expect(localStorage.getItem('token')).toBe('mock-token');
       });
 
       const req = httpMock.expectOne('/api/auth/register');
@@ -125,7 +132,13 @@ describe('AuthService', () => {
 
   describe('getCurrentUser', () => {
     it('should return current user from localStorage', () => {
-      const mockUser = { id: 1, email: 'test@example.com', full_name: 'Test User' };
+      const mockUser = { 
+        id: 1, 
+        email: 'test@example.com', 
+        full_name: 'Test User',
+        is_active: true,
+        created_at: '2023-01-01T00:00:00Z'
+      };
       localStorage.setItem('user', JSON.stringify(mockUser));
 
       expect(service.getCurrentUser()).toEqual(mockUser);
@@ -141,7 +154,14 @@ describe('AuthService', () => {
     it('should refresh token successfully', () => {
       const mockResponse = {
         access_token: 'new-token',
-        token_type: 'bearer'
+        token_type: 'bearer',
+        user: { 
+          id: 1, 
+          email: 'test@example.com', 
+          full_name: 'Test User',
+          is_active: true,
+          created_at: '2023-01-01T00:00:00Z'
+        }
       };
 
       service.refreshToken().subscribe(response => {

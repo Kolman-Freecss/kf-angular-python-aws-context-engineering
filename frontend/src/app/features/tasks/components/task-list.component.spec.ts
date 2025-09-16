@@ -17,8 +17,8 @@ describe('TaskListComponent', () => {
     id: 1,
     title: 'Test Task',
     description: 'Test Description',
-    status: 'todo',
-    priority: 'medium',
+    status: 'todo' as 'todo' | 'in_progress' | 'done',
+    priority: 'medium' as 'low' | 'medium' | 'high' | 'urgent',
     category_id: 1,
     due_date: null,
     created_at: '2024-01-01T00:00:00Z',
@@ -30,7 +30,8 @@ describe('TaskListComponent', () => {
     id: 1,
     name: 'Work',
     color: '#3498db',
-    user_id: 1
+    user_id: 1,
+    created_at: '2024-01-01T00:00:00Z'
   };
 
   beforeEach(async () => {

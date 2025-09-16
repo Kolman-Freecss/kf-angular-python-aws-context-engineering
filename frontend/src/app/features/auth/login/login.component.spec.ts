@@ -110,7 +110,13 @@ describe('LoginComponent', () => {
       const mockResponse = {
         access_token: 'mock-token',
         token_type: 'bearer',
-        user: { id: 1, email: 'test@example.com', full_name: 'Test User' }
+        user: { 
+          id: 1, 
+          email: 'test@example.com', 
+          full_name: 'Test User',
+          is_active: true,
+          created_at: '2023-01-01T00:00:00Z'
+        }
       };
       authService.login.and.returnValue(of(mockResponse));
 
@@ -126,7 +132,13 @@ describe('LoginComponent', () => {
       const mockResponse = {
         access_token: 'mock-token',
         token_type: 'bearer',
-        user: { id: 1, email: 'test@example.com', full_name: 'Test User' }
+        user: { 
+          id: 1, 
+          email: 'test@example.com', 
+          full_name: 'Test User',
+          is_active: true,
+          created_at: '2023-01-01T00:00:00Z'
+        }
       };
       authService.login.and.returnValue(of(mockResponse));
 
@@ -139,7 +151,13 @@ describe('LoginComponent', () => {
       const mockResponse = {
         access_token: 'mock-token',
         token_type: 'bearer',
-        user: { id: 1, email: 'test@example.com', full_name: 'Test User' }
+        user: { 
+          id: 1, 
+          email: 'test@example.com', 
+          full_name: 'Test User',
+          is_active: true,
+          created_at: '2023-01-01T00:00:00Z'
+        }
       };
       authService.login.and.returnValue(of(mockResponse));
 

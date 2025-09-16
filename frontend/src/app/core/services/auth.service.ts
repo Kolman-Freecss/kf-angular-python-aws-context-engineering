@@ -13,7 +13,7 @@ export interface User {
 }
 
 export interface LoginRequest {
-  username: string;
+  username: string; // This should be the email
   password: string;
 }
 
@@ -26,6 +26,7 @@ export interface RegisterRequest {
 export interface AuthResponse {
   access_token: string;
   token_type: string;
+  user: User;
 }
 
 @Injectable({
@@ -79,6 +80,19 @@ export class AuthService {
 
   getToken(): string | null {
     return this._token();
+  }
+
+  getCurrentUser(): User | null {
+    return this._user();
+  }
+
+  refreshToken(): Observable<AuthResponse> {
+    return this.http.post<AuthResponse>(`${this.API_URL}/refresh`, {}).pipe(
+      tap(response => {
+        this.setToken(response.access_token);
+        this.loadUserProfile();
+      })
+    );
   }
 
   private setToken(token: string): void {

@@ -214,7 +214,7 @@ class TestTaskEndpoints:
         assert response.status_code == 404
         
     def test_get_task_analytics_success(self, client, auth_headers, test_task):
-        response = client.get("/api/tasks/analytics", headers=auth_headers)
+        response = client.get("/api/analytics", headers=auth_headers)
         
         assert response.status_code == 200
         data = response.json()

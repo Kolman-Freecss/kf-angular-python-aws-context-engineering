@@ -217,6 +217,7 @@ async def delete_task_cached(
 
 @router.get("/tasks/analytics")
 async def get_task_analytics_cached(
+    days: int = Query(30, ge=1, le=365),
     db: Session = Depends(get_db),
     cache: CacheService = Depends(get_cache),
     current_user: User = Depends(get_current_user)

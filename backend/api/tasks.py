@@ -48,7 +48,7 @@ async def get_tasks(
         tasks=tasks,
         total=total,
         page=page,
-        size=size
+        per_page=size
     )
 
 
@@ -66,7 +66,7 @@ async def create_task(
             Category.user_id == current_user.id
         ).first()
         if not category:
-            raise HTTPException(status_code=404, detail="Category not found")
+            raise HTTPException(status_code=400, detail="Category not found")
     
     db_task = Task(
         **task.dict(),
@@ -232,6 +232,18 @@ async def create_category(
     current_user: User = Depends(get_current_user)
 ):
     """Create a new category"""
+    # Check if category with same name already exists for this user
+    existing_category = db.query(Category).filter(
+        Category.name == category.name,
+        Category.user_id == current_user.id
+    ).first()
+    
+    if existing_category:
+        raise HTTPException(
+            status_code=400,
+            detail="Category with this name already exists"
+        )
+    
     db_category = Category(
         **category.dict(),
         user_id=current_user.id
@@ -288,9 +300,72 @@ async def delete_category(
     if task_count > 0:
         raise HTTPException(
             status_code=400, 
-            detail=f"Cannot delete category with {task_count} tasks. Please reassign or delete tasks first."
+            detail="Cannot delete category with existing tasks. Please reassign or delete tasks first."
         )
     
     db.delete(category)
     db.commit()
     return {"message": "Category deleted successfully"}
+
+
+@router.get("/analytics")
+async def get_task_analytics(
+    days: int = Query(30, ge=1, le=365),
+    db: Session = Depends(get_db),
+    current_user: User = Depends(get_current_user)
+):
+    """Get task analytics"""
+    try:
+        # Get task counts by status
+        total_tasks = db.query(Task).filter(Task.user_id == current_user.id).count()
+        completed_tasks = db.query(Task).filter(
+            Task.user_id == current_user.id,
+            Task.status == 'done'
+        ).count()
+        pending_tasks = db.query(Task).filter(
+            Task.user_id == current_user.id,
+            Task.status == 'todo'
+        ).count()
+        in_progress_tasks = db.query(Task).filter(
+            Task.user_id == current_user.id,
+            Task.status == 'in_progress'
+        ).count()
+        
+        # Calculate completion rate
+        completion_rate = (completed_tasks / total_tasks * 100) if total_tasks > 0 else 0
+        
+        # Get tasks by priority
+        tasks_by_priority = {}
+        for priority in ['low', 'medium', 'high', 'urgent']:
+            count = db.query(Task).filter(
+                Task.user_id == current_user.id,
+                Task.priority == priority
+            ).count()
+            tasks_by_priority[priority] = count
+        
+        # Get tasks by category
+        tasks_by_category = {}
+        categories = db.query(Category).filter(Category.user_id == current_user.id).all()
+        for category in categories:
+            count = db.query(Task).filter(
+                Task.user_id == current_user.id,
+                Task.category_id == category.id
+            ).count()
+            tasks_by_category[category.name] = count
+        
+        return {
+            'total_tasks': total_tasks,
+            'completed_tasks': completed_tasks,
+            'pending_tasks': pending_tasks,
+            'in_progress_tasks': in_progress_tasks,
+            'completion_rate': round(completion_rate, 2),
+            'tasks_by_priority': tasks_by_priority,
+            'tasks_by_category': tasks_by_category
+        }
+        
+    except Exception as e:
+        logger.error(f"Error getting task analytics: {str(e)}")
+        raise HTTPException(
+            status_code=500,
+            detail="Failed to get task analytics"
+        )

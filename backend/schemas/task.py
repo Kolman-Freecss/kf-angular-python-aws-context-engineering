@@ -84,7 +84,7 @@ class TaskListResponse(BaseModel):
     tasks: List[TaskResponse]
     total: int
     page: int
-    size: int
+    per_page: int
 
 
 # Task Dependency Schemas

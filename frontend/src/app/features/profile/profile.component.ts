@@ -41,7 +41,7 @@ import { AuthService } from '../../core/services/auth.service';
           <button class="btn-secondary" (click)="editProfile()">
             Edit Profile
           </button>
-          <button class="btn-danger" (click)="logout()">
+          <button class="btn-danger" data-testid="logout-btn" (click)="logout()">
             Logout
           </button>
         </div>
