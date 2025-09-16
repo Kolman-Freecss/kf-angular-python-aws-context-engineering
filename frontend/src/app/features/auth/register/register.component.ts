@@ -55,7 +55,7 @@ import { AuthService, RegisterRequest } from '../../../core/services/auth.servic
               [class.error]="registerForm.get('password')?.invalid && registerForm.get('password')?.touched"
             />
             <div class="error-message" *ngIf="registerForm.get('password')?.invalid && registerForm.get('password')?.touched">
-              Password must be at least 6 characters long
+              Password must be at least 8 characters long
             </div>
           </div>
           
@@ -207,7 +207,7 @@ export class RegisterComponent {
     this.registerForm = this.fb.group({
       fullName: ['', [Validators.required]],
       email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(6)]],
+      password: ['', [Validators.required, Validators.minLength(8)]],
       confirmPassword: ['', [Validators.required]]
     }, { validators: this.passwordMatchValidator });
   }
