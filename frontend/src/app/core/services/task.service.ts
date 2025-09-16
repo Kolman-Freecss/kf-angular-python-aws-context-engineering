@@ -72,7 +72,7 @@ export interface TaskListResponse {
 export class TaskService {
   private http = inject(HttpClient);
   private cache = inject(CacheService);
-  private apiUrl = `${environment.apiUrl}/api`;
+  private apiUrl = environment.apiUrl;
 
   // Task methods
   getTasks(page = 1, size = 10, filters?: {

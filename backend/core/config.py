@@ -19,7 +19,7 @@ class Settings(BaseSettings):
     ACCESS_TOKEN_EXPIRE_MINUTES: int = 30
     
     # CORS settings
-    ALLOWED_ORIGINS: List[str] = ["http://localhost:3000", "http://frontend:80"]
+    ALLOWED_ORIGINS: List[str] = ["http://localhost:3000", "http://localhost:4200", "http://frontend:80"]
     
     # AWS settings
     AWS_ENDPOINT: str = "http://localstack:4566"
