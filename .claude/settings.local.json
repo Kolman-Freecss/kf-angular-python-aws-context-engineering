@@ -6,7 +6,14 @@
       "Bash(where claude)",
       "Bash(chmod:*)",
       "Bash(claude mcp:*)",
-      "Bash(git add:*)"
+      "Bash(git add:*)",
+      "Bash(npm test)",
+      "Bash(python -m pytest tests/ -v)",
+      "Bash(git commit:*)",
+      "Bash(docker-compose:*)",
+      "Bash(npm install)",
+      "Bash(npm install:*)",
+      "Bash(docker system prune:*)"
     ],
     "deny": [],
     "ask": []
