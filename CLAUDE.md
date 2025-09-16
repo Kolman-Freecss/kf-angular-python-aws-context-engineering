@@ -16,8 +16,10 @@ This is a full-stack application with Angular 20 frontend, FastAPI backend, and 
 
 ### Frontend Development (run from `/frontend`)
 ```bash
-npm start                 # Dev server at http://localhost:4200
+npm start                 # Dev server at http://localhost:4200 (local development)
+npm run start:docker      # Dev server with Docker backend services
 npm run build            # Production build
+npm run build:docker     # Build with Docker environment
 npm test                 # Unit tests (headless)
 npm run test:watch       # Unit tests (watch mode)
 npm run test:coverage    # Unit tests with coverage
@@ -53,9 +55,15 @@ docker-compose up -d --build  # Build and start all services
 docker-compose logs -f        # View logs
 docker-compose down           # Stop services
 
-# Setup script
+# Hybrid Development (Frontend local + Backend Docker)
+docker-compose up -d db redis localstack backend celery celery-beat  # Start backend services only
+cd frontend && npm run start:docker  # Run frontend locally with Docker backend
+
+# Setup and development scripts
 ./scripts/setup.sh           # Complete project setup
 ./scripts/health-check.sh    # Verify all services
+./scripts/dev-hybrid.sh      # Start hybrid development mode (Linux/Mac)
+scripts/dev-hybrid.bat       # Start hybrid development mode (Windows)
 ```
 
 ## Key Development Patterns

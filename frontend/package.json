@@ -5,7 +5,9 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
+    "start:docker": "ng serve --configuration docker",
     "build": "ng build",
+    "build:docker": "ng build --configuration docker",
     "watch": "ng build --watch --configuration development",
     "test": "ng test --watch=false --browsers=ChromeHeadless",
     "test:watch": "ng test",

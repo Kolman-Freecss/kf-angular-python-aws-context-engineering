@@ -13,7 +13,9 @@
       "Bash(docker-compose:*)",
       "Bash(npm install)",
       "Bash(npm install:*)",
-      "Bash(docker system prune:*)"
+      "Bash(docker system prune:*)",
+      "Bash(npm run build:*)",
+      "Bash(npm run start:docker:*)"
     ],
     "deny": [],
     "ask": []
